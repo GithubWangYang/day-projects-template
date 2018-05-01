@@ -1,3 +1,5 @@
+import static org.junit.Assert.*;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -7,6 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wy.dao.CountryMapper;
 import com.wy.model.Country;
 
@@ -42,6 +46,21 @@ public class SpringMybatisTest {
 	@Test
 	public void testCri() throws Exception {
 		Example example=new Example(Country.class);
-		
+		example.createCriteria().andEqualTo("countryname", "中国");
+		mapper.selectByExample(example);
+	}
+	
+	@Test
+	public void testPageHelper() throws Exception {
+	        Example example = new Example(Country.class);
+	        //example.createCriteria().andGreaterThan("id",2);
+	        PageHelper.startPage(2,1);
+	        List<Country> countries = mapper.selectByExample(example);
+	        PageInfo<Country> pageInfo = new PageInfo<Country>(countries);
+	        System.out.println(pageInfo.getTotal());
+
+	        countries = mapper.selectByExample(example);
+	        pageInfo = new PageInfo<Country>(countries);
+	        System.out.println(pageInfo.getTotal());
 	}
 }
