@@ -46,11 +46,11 @@
                         password="${jdbc.password}">
         </jdbcConnection>
 
-        <javaModelGenerator targetPackage="com.isea533.mybatis.model" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="com.wy.model" targetProject="src/main/java"/>
 
         <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
 
-        <javaClientGenerator targetPackage="com.isea533.mybatis.mapper" targetProject="src/main/java"
+        <javaClientGenerator targetPackage="com.wy.dao" targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
         <table tableName="country">
